@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object Segmentation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .metrics-table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+        .metrics-table th, .metrics-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .metrics-table th {
+            background-color: #f2f2f2;
+        }
+        .results-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .result {
+            flex: 0 1 300px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .result h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .result p {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Object Segmentation Results</h1>
+        <div class="original-image">
+            <h2>Original Image</h2>
+            <p>Original image path: {{ original_image_path }}</p>
+            <img src="{{ 'static/' + original_image_path }}" alt="Original Image">
+        </div>
+        <table class="metrics-table">
+            <tr>
+                <th>Model</th>
+                <th>Inference Time (s)</th>
+                <th>Speed Ratio (Model: 1x)</th>
+            </tr>
+            <tr>
+                <td>YOLO</td>
+                <td>{{ yolo_inference_time }}</td>
+                <td>1x</td>
+            </tr>
+            <tr>
+                <td>Mask R-CNN</td>
+                <td>{{ maskrcnn_inference_time }}</td>
+                <td>{{ maskrcnn_ratio }}x</td>
+            </tr>
+        </table>
+        <table class="metrics-table">
+            <tr>
+                <th>Model</th>
+                <th>Inference Time (s)</th>
+                <th>Speed Ratio (YOLO: 1x)</th>
+            </tr>
+            <tr>
+                <td>YOLO</td>
+                <td>{{ yolo_inference_time }}</td>
+                <td>{{yolo_ratio}}x</td>
+            </tr>
+            <tr>
+                <td>Mask R-CNN</td>
+                <td>{{ maskrcnn_inference_time }}</td>
+                <td>1x</td>
+            </tr>
+        </table>
+        <div class="results-container">
+            <div class="result">
+                <h2>YOLO Result</h2>
+                <img src="{{ 'static/result/' + yolo_result_path }}" alt="YOLO Result Image">
+            </div>
+            <div class="result">
+                <h2>Mask R-CNN Result</h2>
+                <img src="{{ 'static/result/' + maskrcnn_result_path }}" alt="Mask R-CNN Result Image">
+            </div>
+        </div>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

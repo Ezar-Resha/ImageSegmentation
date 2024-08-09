@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object Segmentation Results - Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .results-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .result {
+            flex: 0 1 300px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .result h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .result p {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Object Segmentation Results - Video</h1>
+        <div class="original-video">
+            <h2>Original Video</h2>
+            <p>Original video path: {{ original_video_path }}</p>
+            <video controls>
+                <source src="static/{{ original_video_path }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="results-container">
+            <div class="result">
+                <h2>YOLO Result</h2>
+                <p>Result video path: {{ yolo_result_path }}</p>
+                <video controls>
+                    <source src="static/{{ yolo_result_path }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="result">
+                <h2>Mask R-CNN Result</h2>
+                <p>Result video path: {{ maskrcnn_result_path }}</p>
+                <video controls>
+                    <source src="static/{{ maskrcnn_result_path }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>
